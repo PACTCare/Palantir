@@ -39,9 +39,7 @@
       var bundles = ExtractBundles(transactions);
       var sortedBundles = SortBundles(bundles);
 
-      return sortedBundles.Select(
-          bundle => new Message(bundle.Transactions.Aggregate(new TryteString(), (current, tryteString) => current.Concat(tryteString.Fragment)), address))
-        .ToList();
+      return sortedBundles.Select(bundle => new Message(bundle.AggregateFragments(), address)).ToList();
     }
 
     /// <inheritdoc />
